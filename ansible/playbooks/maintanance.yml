@@ -1,0 +1,11 @@
+- name: Maintenance
+  hosts: test
+  become: yes
+  vars:
+    disk_trashold: 90
+  tasks:
+    - name: Update and upgrade 'Debian'
+      apt:
+        update_cache: yes
+        upgrade: yes
+        autoremove: yes

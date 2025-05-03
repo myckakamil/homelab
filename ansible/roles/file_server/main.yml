@@ -1,0 +1,8 @@
+- name: install smb
+  apt:
+    name:
+      - samba
+    state: latest
+  when: ansible_distribution == "Debian"
+
+

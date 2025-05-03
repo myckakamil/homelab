@@ -1,0 +1,7 @@
+- name: intall database
+  apt:
+    name:
+    - mariadb-server
+    state: latest
+  when: ansible_distribution == "Debian"
+

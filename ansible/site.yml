@@ -1,0 +1,22 @@
+- hosts: webservers,db_server,file_server
+  become: yes
+  roles:
+    - base
+
+- hosts: webservers
+  become: yes
+  roles:
+    - web_server
+
+- hosts: db_server
+  become: yes
+  tags: db
+  roles:
+    - db_server
+
+- name: Install samba
+  hosts: file_server
+  become: yes
+  roles:
+    - file_server
+

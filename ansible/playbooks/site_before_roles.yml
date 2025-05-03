@@ -1,0 +1,54 @@
+- hosts: webservers,db_server,file_server
+  become: yes
+  tags: always
+  tasks:
+    - name: Update repositories
+      apt:
+        update_cache: yes
+        upgrade: yes
+      changed_when: no
+      when: ansible_distribution == "Debian"
+
+- hosts: webservers
+  become: yes
+  tags: apache
+  tasks:
+    - name: Install apache and php
+      apt:
+        name: 
+        - apache2
+        - libapache2-mod-php
+        state: latest
+      when: ansible_distribution == "Debian"
+
+    - name: Create default html page
+      copy:
+        src: ../files/default_site.html
+        dest: /var/www/html/index.html
+        owner: www-data
+        group: www-data
+        mode: 0644
+
+- hosts: db_server
+  become: yes
+  tags: db
+  tasks:
+    - name: intall database
+      apt:
+        name:
+        - mariadb-server
+        state: latest
+      when: ansible_distribution == "Debian"
+
+- name: Install samba
+  hosts: file_server
+  become: yes
+  tags: fileserver,smb
+  tasks:
+    - name: install smb
+      apt:
+        name:
+          - samba
+        state: latest
+      when: ansible_distribution == "Debian"
+
