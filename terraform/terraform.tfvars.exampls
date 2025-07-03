@@ -1,0 +1,2 @@
+proxmox_api_token_id = "terraform@pam!terraform"
+proxmox_api_token_secret = "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"

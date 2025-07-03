@@ -1,0 +1,41 @@
+# General ignores
+*.log
+*.bak
+*.backup
+*~
+*.swp
+
+# Terraform ignores
+**/.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+terraform.rc
+.terraform.lock.hcl
+
+# Ansible ignores
+ansible/*.retry
+ansible/roles/
+ansible/inventory.ini
+ansible/vault-password
+ansible/*_vault.yml
+
+# Docker ignores
+docker/.env
+docker/**/env.*
+docker/**/*.env
+
+# Script ignores
+scripts/*.log
+
+# IDE ignores
+.vscode/
+.idea/
+
+# Sensitive files
+secrets.*
+*.key
+*.cert
+*.pem
+*.secret
+credentials.*
