@@ -23,7 +23,7 @@ NETWORK="vmbr0"
 VLAN="30"
 
 wget $DEBIAN_URL
-virt-customize --install qemu-guest-agent -a $DEBIAN_IMG_NAME
+virt-customize --install qemu-guest-agent --timezone Europe/Warsaw -a $DEBIAN_IMG_NAME
 
 qm create $VM_ID \
 	--name $VM_NAME \
