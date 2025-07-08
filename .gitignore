@@ -15,10 +15,8 @@ terraform.rc
 
 # Ansible ignores
 .ansible/
-ansible/*.retry
-ansible/inventory.ini
-ansible/vault-password
-ansible/*_vault.yml
+ansible/.vault_pass
+ansible/**/vault.yaml
 
 # Docker ignores
 docker/.env
