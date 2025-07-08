@@ -35,3 +35,22 @@ module "nextcloud" {
 
   ssh_public_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJF3mRlmUdCwWujN49vBX6n1cmp1CwEtqsYZf8eUftzt kamil"
 }
+
+module "dns-1" {
+  source = "../proxmox_vm"
+
+  vm_id = "103"
+  vm_name = "dns1.lan.mycka.net"
+
+  description = "Pi-hole server"
+  target_node = "pve1"
+
+  cores = 1
+  memory = 2048
+
+  disk_size = "10G"
+  ip_config = "ip=172.30.10.11/24,gw=172.30.10.1"
+  vlan_tag = 10
+
+  ssh_public_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJF3mRlmUdCwWujN49vBX6n1cmp1CwEtqsYZf8eUftzt kamil"
+}

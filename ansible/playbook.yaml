@@ -1,6 +1,6 @@
 ---
-- name: Deploy docker-host
-  hosts: docker
+- name: Deploy Pi-hole servers
+  hosts: pihole
   become: true
   roles:
     - docker-install
