@@ -14,8 +14,8 @@ terraform.rc
 .terraform.lock.hcl
 
 # Ansible ignores
+.ansible/
 ansible/*.retry
-ansible/roles/
 ansible/inventory.ini
 ansible/vault-password
 ansible/*_vault.yml

@@ -1,0 +1,6 @@
+---
+- name: Deploy docker-host
+  hosts: docker
+  become: true
+  roles:
+    - docker-install
