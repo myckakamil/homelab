@@ -7,23 +7,30 @@
     state: present
     update_cache: true
 
-- name: Create directory for GPG key
+- name: Create directory for APT keyrings
   ansible.builtin.file:
     path: /etc/apt/keyrings
     state: directory
     mode: '0755'
 
-- name: Add Docker key
+- name: Download Docker GPG key
   ansible.builtin.get_url:
-    url: 'https://download.docker.com/linux/debian/gpg'
+    url: https://download.docker.com/linux/debian/gpg
     dest: /etc/apt/keyrings/docker.asc
-    mode: '0600'
+    mode: '0644'
 
-- name: Add Docker repository
+- name: Convert Docker GPG key to binary format
+  ansible.builtin.command:
+    cmd: gpg --dearmor -o /etc/apt/keyrings/docker.gpg /etc/apt/keyrings/docker.asc
+  args:
+    creates: /etc/apt/keyrings/docker.gpg
+
+- name: Add Docker APT repository
   ansible.builtin.apt_repository:
-    repo: "{{ docker_apt_repo }}"
-    state: present
+    repo: "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian bookworm stable"
     filename: docker
+    state: present
+    update_cache: true
 
 - name: Install docker
   ansible.builtin.apt:

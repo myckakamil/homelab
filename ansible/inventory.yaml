@@ -1,19 +1,17 @@
 debian:
-  vars:
-    ansible_user: 'kamil'
-    ansible_python_interpreter: /usr/bin/python3
   hosts:
-    docker-host:
-      ansible_host: 172.30.20.101
     nextcloud:
+      ansible_host: 172.30.20.101
+    docker-host:
       ansible_host: 172.30.20.102
-    dns1:
+    pihole1:
       ansible_host: 172.30.10.11
+    pihole2:
+      ansible_host: 172.30.10.12
 
 pihole:
-  vars:
-    ansible_user: 'kamil'
-    ansible_python_interpreter: /usr/bin/python3
   hosts:
-    dns1:
+    pihole1:
       ansible_host: 172.30.10.11
+    pihole2:
+      ansible_host: 172.30.10.12
