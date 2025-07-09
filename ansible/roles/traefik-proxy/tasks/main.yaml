@@ -1,0 +1,57 @@
+- name: Setup traefik-proxy directory
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    mode: '0755'
+    owner: '{{ ansible_user }}'
+    group: '{{ ansible_user }}'
+  loop:
+    - /home/{{ ansible_user }}/traefik
+    - /home/{{ ansible_user }}/traefik/data
+
+- name: Create acme.json file
+  ansible.builtin.file:
+    path: /home/{{ ansible_user }}/traefik/data/acme.json
+    state: touch
+    mode: '0600'
+    owner: '{{ ansible_user }}'
+    group: '{{ ansible_user }}'
+    modification_time: preserve
+    access_time: preserve
+
+- name: Copy docker-compose file
+  ansible.builtin.template:
+    src: "docker-compose.yaml.j2"
+    dest: /home/{{ ansible_user }}/traefik/docker-compose.yaml
+    mode: '0755'
+    owner: '{{ ansible_user }}'
+    group: '{{ ansible_user }}'
+  notify: Restart traefik
+
+- name: Copy config.yml file
+  ansible.builtin.template:
+    src: "config.yml.j2"
+    dest: /home/{{ ansible_user }}/traefik/data/config.yml
+    mode: '0600'
+    owner: '{{ ansible_user }}'
+    group: '{{ ansible_user }}'
+  notify: Restart traefik
+
+- name: Copy traefik.yml file
+  ansible.builtin.template:
+    src: "traefik.yml.j2"
+    dest: /home/{{ ansible_user }}/traefik/data/traefik.yml
+    mode: '0600'
+    owner: '{{ ansible_user }}'
+    group: '{{ ansible_user }}'
+  notify: Restart traefik
+
+- name: Create proxy network
+  community.docker.docker_network:
+    name: proxy
+
+- name: Deploy traefik container with docker compose
+  community.docker.docker_compose_v2:
+    project_src: /home/{{ ansible_user }}/traefik
+    state: present
+    recreate: auto

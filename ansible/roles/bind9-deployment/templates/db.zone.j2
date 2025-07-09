@@ -1,6 +1,6 @@
 $TTL    86400
 @       IN      SOA     ns1.{{ zone_name }}. admin.{{ zone_name }}. (
-                          {{ ansible_date_time.epoch | int }} ; Serial
+                 {{ dns_serial }}         ; Serial
                     604800         ; Refresh
                      86400         ; Retry
                    2419200         ; Expire

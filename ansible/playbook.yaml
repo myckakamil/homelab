@@ -11,3 +11,10 @@
   become: true
   roles:
     - bind9-deployment
+
+- name: Deploy traefik proxy
+  hosts: docker-host
+  become: true
+  roles:
+    - docker-install
+    - traefik-proxy
