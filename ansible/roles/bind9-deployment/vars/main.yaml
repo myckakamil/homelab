@@ -4,15 +4,14 @@ dns_forwarders:
   - 9.9.9.9
 
 dns_server_ip: "{{ ansible_default_ipv4.address }}"
-dns_serial: 202506091
+dns_serial: 202506092
 
 # DNS Records
 records:
   - { subname: "gateway", type: "A", dest: "172.30.1.1" }
-  - { subname: "pve1", type: "A", dest: "172.30.50.101" }
-  - { subname: "pve2", type: "A", dest: "172.30.50.102" }
   - { subname: "docker-host", type: "A", dest: "172.30.20.102" }
   - { subname: "traefik-dashboard", type: "CNAME", dest: "docker-host" }
-  - { subname: "proxmox", type: "CNAME", dest: "docker-host" }
+  - { subname: "pve1", type: "CNAME", dest: "docker-host" }
+  - { subname: "pve2", type: "CNAME", dest: "docker-host" }
   - { subname: "pihole1", type: "CNAME", dest: "docker-host" }
   - { subname: "pihole2", type: "CNAME", dest: "docker-host" }

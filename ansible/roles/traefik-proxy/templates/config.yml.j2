@@ -1,14 +1,24 @@
 http:
   routers:
-    proxmox:
+    pve1:
       entryPoints:
         - "https"
-      rule: "Host(`proxmox.{{ zone_name }}`)"
+      rule: "Host(`pve1.{{ zone_name }}`)"
       middlewares:
         - default-headers
         - https-redirectscheme
       tls: {}
-      service: proxmox
+      service: pve1
+
+    pve2:
+      entryPoints:
+        - "https"
+      rule: "Host(`pve2.{{ zone_name }}`)"
+      middlewares:
+        - default-headers
+        - https-redirectscheme
+      tls: {}
+      service: pve2
 
     pihole1:
       entryPoints:
@@ -31,10 +41,15 @@ http:
       service: pihole2
 
   services:
-    proxmox:
+    pve1:
       loadBalancer:
         servers:
           - url: "https://172.30.50.101:8006"
+        passHostHeader: true
+
+    pve2:
+      loadBalancer:
+        servers:
           - url: "https://172.30.50.102:8006"
         passHostHeader: true
 
