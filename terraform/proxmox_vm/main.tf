@@ -7,6 +7,7 @@ resource "proxmox_vm_qemu" "vm" {
   full_clone  = var.full_clone
   agent       = 1
   os_type     = "cloud-init"
+  onboot      = var.onboot
 
   dynamic "serial" {
     for_each = var.enable_serial ? [1] : []

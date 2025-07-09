@@ -144,6 +144,12 @@ variable "agent_enabled" {
   default     = 1
 }
 
+variable "onboot" {
+  type        = bool
+  description = "Enable start on boot"
+  default     = true
+}
+
 variable "boot_order" {
   type        = string
   description = "Boot order specification"
