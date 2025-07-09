@@ -5,13 +5,20 @@ debian:
     docker-host:
       ansible_host: 172.30.20.102
     pihole1:
-      ansible_host: 172.30.10.11
+      ansible_host: 172.30.20.11
     pihole2:
-      ansible_host: 172.30.10.12
+      ansible_host: 172.30.20.12
 
 pihole:
   hosts:
     pihole1:
-      ansible_host: 172.30.10.11
+      ansible_host: 172.30.20.11
     pihole2:
-      ansible_host: 172.30.10.12
+      ansible_host: 172.30.20.12
+
+bind9:
+  hosts:
+    bind9-1:
+      ansible_host: 172.30.20.21
+    bind9-2:
+      ansible_host: 172.30.20.22

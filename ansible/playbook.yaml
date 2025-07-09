@@ -4,4 +4,10 @@
   become: true
   roles:
     - docker-install
-    - pihole-deploy
+    - pihole-deployment
+
+- name: Deploy bind9 servers
+  hosts: bind9
+  become: true
+  roles:
+    - bind9-deployment

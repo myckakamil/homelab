@@ -49,8 +49,8 @@ module "pihole1" {
   memory = 2048
 
   disk_size = "10G"
-  ip_config = "ip=172.30.10.11/24,gw=172.30.10.1"
-  vlan_tag = 10
+  ip_config = "ip=172.30.20.11/24,gw=172.30.20.1"
+  vlan_tag = 20
 
   ssh_public_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJF3mRlmUdCwWujN49vBX6n1cmp1CwEtqsYZf8eUftzt kamil"
 }
@@ -68,8 +68,46 @@ module "pihole2" {
   memory = 2048
 
   disk_size = "10G"
-  ip_config = "ip=172.30.10.12/24,gw=172.30.10.1"
-  vlan_tag = 10
+  ip_config = "ip=172.30.20.12/24,gw=172.30.20.1"
+  vlan_tag = 20
+
+  ssh_public_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJF3mRlmUdCwWujN49vBX6n1cmp1CwEtqsYZf8eUftzt kamil"
+}
+
+module "bind1" {
+  source = "../proxmox_vm"
+
+  vm_id = "105"
+  vm_name = "bind1.lan.mycka.net"
+
+  description = "Bind9 server number 1"
+  target_node = "pve1"
+
+  cores = 1
+  memory = 2048
+
+  disk_size = "10G"
+  ip_config = "ip=172.30.20.21/24,gw=172.30.20.1"
+  vlan_tag = 20
+
+  ssh_public_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJF3mRlmUdCwWujN49vBX6n1cmp1CwEtqsYZf8eUftzt kamil"
+}
+
+module "bind2" {
+  source = "../proxmox_vm"
+
+  vm_id = "106"
+  vm_name = "bind2.lan.mycka.net"
+
+  description = "Bind9 server number 2"
+  target_node = "pve2"
+
+  cores = 1
+  memory = 2048
+
+  disk_size = "10G"
+  ip_config = "ip=172.30.20.22/24,gw=172.30.20.1"
+  vlan_tag = 20
 
   ssh_public_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJF3mRlmUdCwWujN49vBX6n1cmp1CwEtqsYZf8eUftzt kamil"
 }

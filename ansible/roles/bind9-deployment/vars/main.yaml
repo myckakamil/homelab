@@ -1,0 +1,7 @@
+dns_forwarders:
+  - 172.30.20.11
+  - 172.30.20.12
+  - 9.9.9.9
+
+zone_name: 'lan.mycka.net'
+dns_server_ip: "{{ ansible_default_ipv4.address }}"

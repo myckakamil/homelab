@@ -1,15 +1,3 @@
----
-- name: Ensure docker compose is installed
-  ansible.builtin.package:
-    name: docker-compose
-    state: present
-
-- name: Ensure docker is running
-  ansible.builtin.service:
-    name: docker
-    state: started
-    enabled: true
-
 - name: Setup Pi-hole directory
   ansible.builtin.file:
     path: "{{ item }}"
@@ -19,7 +7,8 @@
     group: '{{ ansible_user }}'
   loop:
     - /home/{{ ansible_user }}/pihole/
-    - /home/{{ ansible_user }}/pihole/hosts
+    - /home/{{ ansible_user }}/pihole/data
+    - /home/{{ ansible_user }}/pihole/data/etc-pihole
 
 - name: Disable systemd-resolved
   ansible.builtin.service:
@@ -35,7 +24,7 @@
     owner: '{{ ansible_user }}'
     group: '{{ ansible_user }}'
 
-- name: Run pihole docker compose up
+- name: Run pihole docker compose
   community.docker.docker_compose_v2:
     project_src: /home/{{ ansible_user }}/pihole
     state: present
