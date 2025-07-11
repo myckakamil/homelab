@@ -8,7 +8,6 @@
   loop:
     - /home/{{ ansible_user }}/pihole/
     - /home/{{ ansible_user }}/pihole/data
-    - /home/{{ ansible_user }}/pihole/data/etc-pihole
 
 - name: Disable systemd-resolved
   ansible.builtin.service:
@@ -24,31 +23,9 @@
     owner: '{{ ansible_user }}'
     group: '{{ ansible_user }}'
 
-# Don't work yet
-- name: Copy adlist.list
-  ansible.builtin.template:
-    src: "adlist.list.j2"
-    dest: "/home/{{ ansible_user }}/pihole/data/etc-pihole/adlist.list"
-    mode: '0755'
-    owner: '{{ ansible_user }}'
-    group: '{{ ansible_user }}'
-
-- name: Run pihole docker compose
+- name: Run docker compose
   community.docker.docker_compose_v2:
     project_src: /home/{{ ansible_user }}/pihole
     state: present
     pull: always
-    recreate: auto
-    remove_orphans: true
-
-- name: Update Pi-hole
-  community.docker.docker_container_exec:
-    container: pihole
-    command: pihole -up
-    detach: false
-
-- name: Update gravity (adlists)
-  community.docker.docker_container_exec:
-    container: pihole
-    command: pihole -g
-    detach: false
+  notify: "Docker compose up changed"
