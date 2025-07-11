@@ -18,3 +18,9 @@
   roles:
     - docker-install
     - traefik-proxy
+
+- name: Deploy mariadb
+  hosts: mysql
+  become: true
+  roles:
+    - mariadb
