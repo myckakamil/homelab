@@ -24,3 +24,10 @@
   become: true
   roles:
     - mariadb
+
+- name: Deploy nextcloud
+  hosts: nextcloud
+  become: true
+  roles:
+    - docker-install
+    - nextcloud

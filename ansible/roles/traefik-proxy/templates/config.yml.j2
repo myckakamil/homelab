@@ -40,6 +40,16 @@ http:
       tls: {}
       service: pihole2
 
+    nextcloud:
+      entryPoints:
+        - "https"
+      rule: "Host(`nextcloud.{{ zone_name }}`)"
+      middlewares:
+        - default-headers
+        - allow-all
+      tls: {}
+      service: nextcloud
+
   services:
     pve1:
       loadBalancer:
@@ -51,6 +61,12 @@ http:
       loadBalancer:
         servers:
           - url: "https://172.30.50.102:8006"
+        passHostHeader: true
+
+    nextcloud:
+      loadBalancer:
+        servers:
+          - url: "http://172.30.20.101:80"
         passHostHeader: true
 
     pihole1:
@@ -88,6 +104,12 @@ http:
       ipAllowList:
         sourceRange:
           - "172.30.0.0/16"
+
+    allow-all:
+      ipAllowList:
+        sourceRange:
+          - "0.0.0.0/0"
+
 
     secured:
       chain:

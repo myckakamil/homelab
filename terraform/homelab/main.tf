@@ -111,3 +111,21 @@ module "bind2" {
 
   ssh_public_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJF3mRlmUdCwWujN49vBX6n1cmp1CwEtqsYZf8eUftzt kamil"
 }
+
+module "mysql" {
+  source = "../proxmox_vm"
+
+  vm_id = "107"
+  vm_name = "mysql.lan.mycka.net"
+  
+  description = "Mariadb server"
+  target_node = "pve2"
+  cores = "1"
+  memory = "2038"
+  
+  disk_size = "20G"
+  ip_config = "ip=172.30.20.107/24,gw=172.30.20.1"
+  vlan_tag = "20"
+
+  ssh_public_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJF3mRlmUdCwWujN49vBX6n1cmp1CwEtqsYZf8eUftzt kamil"
+}

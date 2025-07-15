@@ -28,4 +28,4 @@
     project_src: /home/{{ ansible_user }}/pihole
     state: present
     pull: always
-  notify: "Docker compose up changed"
+  notify: Docker compose up changed
