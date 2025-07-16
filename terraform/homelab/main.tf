@@ -24,7 +24,7 @@ module "docker_host" {
   vm_name = "docker-host.lan.mycka.net"
 
   description = "Docker host"
-  target_node = "pve2"
+  target_node = "pve1"
 
   cores = 4
   memory = 8192
