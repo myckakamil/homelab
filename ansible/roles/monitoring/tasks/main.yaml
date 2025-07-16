@@ -12,6 +12,9 @@
       - /home/{{ ansible_user }}/monitoring/prometheus
       - /home/{{ ansible_user }}/monitoring/prometheus/config
       - /home/{{ ansible_user }}/monitoring/prometheus/data
+      - /home/{{ ansible_user }}/monitoring/influxdb
+      - /home/{{ ansible_user }}/monitoring/influxdb/data
+      - /home/{{ ansible_user }}/monitoring/influxdb/config
 
 - name: Move prometheus config file
   ansible.builtin.template:

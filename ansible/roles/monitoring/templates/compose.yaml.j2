@@ -13,6 +13,7 @@ services:
      - './grafana/data:/var/lib/grafana'
     networks:
      - proxy
+     - grafana-monitoring
     labels:
      - "traefik.enable=true"
      - "traefik.http.routers.grafana.entrypoints=http"
@@ -36,7 +37,29 @@ services:
     volumes:
      - './prometheus/config/prometheus.yaml:/etc/prometheus/prometheus.yaml'
      - './prometheus/data:/prometheus'
+    networks:
+     - grafana-monitoring
+  influxdb:
+    image: influxdb
+    container_name: influxdb
+    user: "1000:1000"
+    restart: unless-stopped
+    ports:
+     - 8086:8086
+     - 8089:8089/udp
+    volumes:
+     - './influxdb/config:/etc/influxdb2'
+     - './influxdb/data:/var/lib/influxdb2'
+    environment:
+     - DOCKER_INFLUXDB_INIT_MODE=setup
+     - DOCKER_INFLUXDB_INIT_USERNAME={{ ansible_user }}
+     - DOCKER_INFLUXDB_INIT_PASSWORD={{ password }}
+     - DOCKER_INFLUXDB_INIT_ORG=homelab
+     - DOCKER_INFLUXDB_INIT_BUCKET=homelab
+    networks:
+     - grafana-monitoring
 
 networks:
+  grafana-monitoring:
   proxy:
     external: true
