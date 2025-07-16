@@ -7,9 +7,19 @@
     group: '{{ ansible_user }}'
   loop:
       - /home/{{ ansible_user }}/monitoring
-      - /home/{{ ansible_user }}/monitoring/data
-      - /home/{{ ansible_user }}/monitoring/data/loki
-      - /home/{{ ansible_user }}/monitoring/data/grafana
+      - /home/{{ ansible_user }}/monitoring/grafana
+      - /home/{{ ansible_user }}/monitoring/grafana/data
+      - /home/{{ ansible_user }}/monitoring/prometheus
+      - /home/{{ ansible_user }}/monitoring/prometheus/config
+      - /home/{{ ansible_user }}/monitoring/prometheus/data
+
+- name: Move prometheus config file
+  ansible.builtin.template:
+    src: "prometheus.yaml.j2"
+    dest: "/home/{{ ansible_user }}/monitoring/prometheus/config/prometheus.yaml"
+    mode: '0755'
+    owner: '{{ ansible_user }}'
+    group: '{{ ansible_user }}'
 
 - name: Move docker compose file
   ansible.builtin.template:

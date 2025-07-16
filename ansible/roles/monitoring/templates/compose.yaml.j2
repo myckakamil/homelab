@@ -7,10 +7,10 @@ services:
     ports:
      - '3000:3000'
     environment:
-     - GF_SECURITY_ADMIN_USER={{ kamil }}
+     - GF_SECURITY_ADMIN_USER={{ ansible_user }}
      - GF_SECURITY_ADMIN_PASSWORD={{ password }}
     volumes:
-     - './data/grafana:/var/lib/grafana'
+     - './grafana/data:/var/lib/grafana'
     networks:
      - proxy
     labels:
@@ -26,6 +26,16 @@ services:
      - "traefik.http.routers.grafana-secure.service=grafana"
      - "traefik.http.services.grafana.loadbalancer.server.port=3000"
      - "traefik.docker.network=proxy"
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    user: "1000:1000"
+    restart: unless-stopped
+    ports:
+     - '9090:9090'
+    volumes:
+     - './prometheus/config/prometheus.yaml:/etc/prometheus/prometheus.yaml'
+     - './prometheus/data:/prometheus'
 
 networks:
   proxy:
