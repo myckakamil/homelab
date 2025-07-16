@@ -16,4 +16,5 @@ records:
   - { subname: "pve2", type: "CNAME", dest: "docker-host" }
   - { subname: "pihole1", type: "CNAME", dest: "docker-host" }
   - { subname: "pihole2", type: "CNAME", dest: "docker-host" }
+  - { subname: "grafana", type: "CNAME", dest: "docker-host" }
   - { subname: "mysql", type: "A", dest: "172.30.20.107" }

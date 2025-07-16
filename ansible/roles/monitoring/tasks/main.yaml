@@ -1,0 +1,26 @@
+- name: Create directory structure for monitoring
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    mode: '0755'
+    owner: '{{ ansible_user }}'
+    group: '{{ ansible_user }}'
+  loop:
+      - /home/{{ ansible_user }}/monitoring
+      - /home/{{ ansible_user }}/monitoring/data
+      - /home/{{ ansible_user }}/monitoring/data/loki
+      - /home/{{ ansible_user }}/monitoring/data/grafana
+
+- name: Move docker compose file
+  ansible.builtin.template:
+    src: "compose.yaml.j2"
+    dest: "/home/{{ ansible_user }}/monitoring/compose.yaml"
+    mode: '0755'
+    owner: '{{ ansible_user }}'
+    group: '{{ ansible_user }}'
+
+- name: Run docker compose
+  community.docker.docker_compose_v2:
+    project_src: /home/{{ ansible_user }}/monitoring
+    state: present
+    pull: always

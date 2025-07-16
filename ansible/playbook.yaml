@@ -31,3 +31,10 @@
   roles:
     - docker-install
     - nextcloud
+
+- name: Deploy monitoring stack
+  hosts: docker-host
+  become: true
+  roles:
+    - docker-install
+    - monitoring
