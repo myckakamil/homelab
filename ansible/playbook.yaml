@@ -1,9 +1,14 @@
 ---
+- name: Deploy docker
+  hosts: docker_hosts
+  become: true
+  roles:
+    - docker-install
+
 - name: Deploy Pi-hole servers
   hosts: pihole
   become: true
   roles:
-    - docker-install
     - pihole-deployment
 
 - name: Deploy bind9 servers
@@ -16,7 +21,6 @@
   hosts: docker-host
   become: true
   roles:
-    - docker-install
     - traefik-proxy
 
 - name: Deploy mariadb
@@ -29,12 +33,10 @@
   hosts: nextcloud
   become: true
   roles:
-    - docker-install
     - nextcloud
 
 - name: Deploy monitoring stack
   hosts: docker-host
   become: true
   roles:
-    - docker-install
     - monitoring

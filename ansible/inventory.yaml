@@ -15,6 +15,17 @@ debian:
     mysql:
       ansible_host: 172.30.20.107
 
+docker_hosts:
+  hosts:
+    nextcloud:
+      ansible_host: 172.30.20.101
+    docker-host:
+      ansible_host: 172.30.20.102
+    pihole1:
+      ansible_host: 172.30.20.11
+    pihole2:
+      ansible_host: 172.30.20.12
+
 pihole:
   hosts:
     pihole1:

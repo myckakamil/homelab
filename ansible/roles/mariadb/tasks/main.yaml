@@ -15,6 +15,7 @@
 - name: Removes anonymous user
   community.mysql.mysql_user:
     name: ''
+    column_case_sensitive: false
     host: localhost
     state: absent
     login_unix_socket: /run/mysqld/mysqld.sock

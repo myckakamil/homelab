@@ -6,15 +6,15 @@
     owner: '{{ ansible_user }}'
     group: '{{ ansible_user }}'
   loop:
-      - /home/{{ ansible_user }}/monitoring
-      - /home/{{ ansible_user }}/monitoring/grafana
-      - /home/{{ ansible_user }}/monitoring/grafana/data
-      - /home/{{ ansible_user }}/monitoring/prometheus
-      - /home/{{ ansible_user }}/monitoring/prometheus/config
-      - /home/{{ ansible_user }}/monitoring/prometheus/data
-      - /home/{{ ansible_user }}/monitoring/influxdb
-      - /home/{{ ansible_user }}/monitoring/influxdb/data
-      - /home/{{ ansible_user }}/monitoring/influxdb/config
+    - /home/{{ ansible_user }}/monitoring
+    - /home/{{ ansible_user }}/monitoring/grafana
+    - /home/{{ ansible_user }}/monitoring/grafana/data
+    - /home/{{ ansible_user }}/monitoring/prometheus
+    - /home/{{ ansible_user }}/monitoring/prometheus/config
+    - /home/{{ ansible_user }}/monitoring/prometheus/data
+    - /home/{{ ansible_user }}/monitoring/influxdb
+    - /home/{{ ansible_user }}/monitoring/influxdb/data
+    - /home/{{ ansible_user }}/monitoring/influxdb/config
 
 - name: Move prometheus config file
   ansible.builtin.template:
