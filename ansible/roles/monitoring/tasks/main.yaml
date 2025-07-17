@@ -23,6 +23,7 @@
     mode: '0755'
     owner: '{{ ansible_user }}'
     group: '{{ ansible_user }}'
+  notify: Config changed
 
 - name: Move docker compose file
   ansible.builtin.template:
@@ -31,6 +32,7 @@
     mode: '0755'
     owner: '{{ ansible_user }}'
     group: '{{ ansible_user }}'
+  notify: Config changed
 
 - name: Run docker compose
   community.docker.docker_compose_v2:

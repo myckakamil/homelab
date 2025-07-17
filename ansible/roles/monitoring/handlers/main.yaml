@@ -1,0 +1,5 @@
+---
+- name: Config changed
+  community.docker.docker_compose_v2:
+    project_src: /home/{{ ansible_user }}/monitoring
+    state: restarted
