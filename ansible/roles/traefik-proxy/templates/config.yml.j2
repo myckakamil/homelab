@@ -5,8 +5,7 @@ http:
         - "https"
       rule: "Host(`pve1.{{ zone_name }}`)"
       middlewares:
-        - default-headers
-        - https-redirectscheme
+        - secured
       tls: {}
       service: pve1
 
@@ -15,8 +14,7 @@ http:
         - "https"
       rule: "Host(`pve2.{{ zone_name }}`)"
       middlewares:
-        - default-headers
-        - https-redirectscheme
+        - secured
       tls: {}
       service: pve2
 
@@ -25,8 +23,7 @@ http:
         - "https"
       rule: "Host(`pihole1.{{ zone_name }}`)"
       middlewares:
-        - default-headers
-        - default-whitelist
+        - secured
       tls: {}
       service: pihole1
 
@@ -35,8 +32,7 @@ http:
         - "https"
       rule: "Host(`pihole2.{{ zone_name }}`)"
       middlewares:
-        - default-headers
-        - default-whitelist
+        - secured
       tls: {}
       service: pihole2
 
@@ -110,7 +106,6 @@ http:
       ipAllowList:
         sourceRange:
           - "0.0.0.0/0"
-
 
     secured:
       chain:
