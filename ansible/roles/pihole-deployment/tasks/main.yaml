@@ -22,10 +22,11 @@
     mode: '0755'
     owner: '{{ ansible_user }}'
     group: '{{ ansible_user }}'
+  notify: Changed config file
 
 - name: Run docker compose
   community.docker.docker_compose_v2:
     project_src: /home/{{ ansible_user }}/pihole
     state: present
     pull: always
-  notify: Docker compose up changed
+  notify: Update pihole
