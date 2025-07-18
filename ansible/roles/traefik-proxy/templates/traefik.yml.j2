@@ -11,6 +11,15 @@ entryPoints:
           scheme: https
   https:
     address: ":443"
+  http-external:
+    address: ":81"
+    http:
+      redirections:
+        entryPoint:
+          to: https
+          scheme: https
+  https-external:
+    address: ":444"
 serversTransport:
   insecureSkipVerify: true
 providers:

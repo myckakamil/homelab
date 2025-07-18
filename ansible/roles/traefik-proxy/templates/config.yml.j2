@@ -43,6 +43,7 @@ http:
     nextcloud:
       entryPoints:
         - "https"
+        - "https-external"
       rule: "Host(`nextcloud.{{ zone_name }}`)"
       middlewares:
         - default-headers
