@@ -57,4 +57,5 @@ resource "proxmox_vm_qemu" "vm" {
   ipconfig0 = var.ip_config
   ciuser    = var.cloudinit_user
   sshkeys   = var.ssh_public_key
+  cipassword = var.cloudinit_password
 }

@@ -10,11 +10,12 @@ module "nextcloud" {
   cores = 2
   memory = 4096
 
-  disk_size = "100G"
+  disk_size = "200G"
   ip_config = "ip=172.30.20.101/24,gw=172.30.20.1"
   vlan_tag = 20
 
   ssh_public_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJF3mRlmUdCwWujN49vBX6n1cmp1CwEtqsYZf8eUftzt kamil"
+  cloudinit_password = var.secure_password
 }
 
 module "docker_host" {
@@ -34,6 +35,7 @@ module "docker_host" {
   vlan_tag = 20
 
   ssh_public_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJF3mRlmUdCwWujN49vBX6n1cmp1CwEtqsYZf8eUftzt kamil"
+  cloudinit_password = var.secure_password
 }
 
 module "pihole1" {
@@ -53,6 +55,7 @@ module "pihole1" {
   vlan_tag = 20
 
   ssh_public_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJF3mRlmUdCwWujN49vBX6n1cmp1CwEtqsYZf8eUftzt kamil"
+  cloudinit_password = var.secure_password
 }
 
 module "pihole2" {
@@ -72,6 +75,7 @@ module "pihole2" {
   vlan_tag = 20
 
   ssh_public_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJF3mRlmUdCwWujN49vBX6n1cmp1CwEtqsYZf8eUftzt kamil"
+  cloudinit_password = var.secure_password
 }
 
 module "bind1" {
@@ -91,6 +95,7 @@ module "bind1" {
   vlan_tag = 20
 
   ssh_public_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJF3mRlmUdCwWujN49vBX6n1cmp1CwEtqsYZf8eUftzt kamil"
+  cloudinit_password = var.secure_password
 }
 
 module "bind2" {
@@ -110,6 +115,7 @@ module "bind2" {
   vlan_tag = 20
 
   ssh_public_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJF3mRlmUdCwWujN49vBX6n1cmp1CwEtqsYZf8eUftzt kamil"
+  cloudinit_password = var.secure_password
 }
 
 module "mysql" {
@@ -128,4 +134,5 @@ module "mysql" {
   vlan_tag = "20"
 
   ssh_public_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJF3mRlmUdCwWujN49vBX6n1cmp1CwEtqsYZf8eUftzt kamil"
+  cloudinit_password = var.secure_password
 }

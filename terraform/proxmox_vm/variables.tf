@@ -120,6 +120,12 @@ variable "cloudinit_user" {
   default     = "kamil"
 }
 
+variable "cloudinit_password" {
+  type        = string
+  description = "Default cloud-init user for SSH access"
+  default     = "changeme"
+}
+
 variable "ssh_public_key" {
   type        = string
   description = "SSH public key to inject via cloud-init"
