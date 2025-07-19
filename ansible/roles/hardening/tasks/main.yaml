@@ -1,0 +1,37 @@
+- name: Installing packages
+  ansible.builtin.apt:
+    name:
+      - fail2ban
+      - syslog-ng
+    state: present
+    update_cache: true
+
+- name: Enable syslog-ng
+  ansible.builtin.service:
+    name: syslog-ng
+    state: started
+    enabled: true
+
+- name: Apply default fail2ban config
+  ansible.builtin.template:
+    src: fail2ban-defaults.conf.j2
+    dest: /etc/fail2ban/jail.d/defaults.conf
+    owner: root
+    group: root
+    mode: '0644'
+  notify: Restart fail2ban
+
+- name: Enable fail2ban for ssh
+  ansible.builtin.template:
+    src: fail2ban-sshd.conf.j2
+    dest: /etc/fail2ban/jail.d/sshd.conf
+    owner: root
+    group: root
+    mode: '0644'
+  notify: Restart fail2ban
+
+- name: Enable fail2ban
+  ansible.builtin.service:
+    name: fail2ban
+    state: started
+    enabled: true

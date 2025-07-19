@@ -1,4 +1,10 @@
 ---
+- name: Hardening servers
+  hosts: all
+  become: true
+  roles:
+    - hardening
+
 - name: Deploy docker
   hosts: docker_hosts
   become: true
