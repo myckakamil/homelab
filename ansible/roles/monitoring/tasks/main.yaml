@@ -25,6 +25,15 @@
     group: '{{ ansible_user }}'
   notify: Config changed
 
+- name: Move snmp-exporter config file
+  ansible.builtin.template:
+    src: "snmp.yml.j2"
+    dest: "/home/{{ ansible_user }}/monitoring/prometheus/config/snmp.yml"
+    mode: '0755'
+    owner: '{{ ansible_user }}'
+    group: '{{ ansible_user }}'
+  notify: Config changed
+
 - name: Move docker compose file
   ansible.builtin.template:
     src: "compose.yaml.j2"

@@ -46,6 +46,18 @@ services:
       - "9100"
     networks:
       - grafana-monitoring
+      
+  snmp-exporter:
+    image: prom/snmp-exporter:main
+    container_name: snmp-exporter
+    restart: unless-stopped
+    volumes:
+      - "./prometheus/config/snmp.yml:/etc/snmp_exporter/snmp.yml"
+    ports:
+      - "9116:9116"
+      - "161:161/udp"
+    networks:
+      - grafana-monitoring
 
   cadvisor:
     image: gcr.io/cadvisor/cadvisor:latest
