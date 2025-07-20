@@ -40,9 +40,11 @@
   become: true
   roles:
     - nextcloud
+    - monitoring-node
 
 - name: Deploy monitoring stack
   hosts: docker-host
   become: true
   roles:
-    - monitoring
+    - monitoring-server
+    - monitoring-node

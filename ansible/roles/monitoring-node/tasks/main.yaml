@@ -1,0 +1,36 @@
+---
+- name: Define monitoring services
+  ansible.builtin.set_fact:
+    monitoring_services:
+      - name: node-exporter
+        condition: true
+      - name: cadvisor
+        condition: "'docker' in ansible_facts.packages"
+
+- name: Ensure monitoring directories exist
+  ansible.builtin.file:
+    path: "/home/{{ ansible_user }}/{{ item.name }}"
+    state: directory
+    mode: '0755'
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+  loop: "{{ monitoring_services }}"
+  when: item.condition
+
+- name: Deploy Docker Compose files for monitoring
+  ansible.builtin.template:
+    src: "{{ item.name }}.yaml.j2"
+    dest: "/home/{{ ansible_user }}/{{ item.name }}/compose.yaml"
+    mode: '0644'
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+  loop: "{{ monitoring_services }}"
+  when: item.condition
+
+- name: Start monitoring containers
+  community.docker.docker_compose_v2:
+    project_src: "/home/{{ ansible_user }}/{{ item.name }}"
+    state: present
+    pull: always
+  loop: "{{ monitoring_services }}"
+  when: item.condition
