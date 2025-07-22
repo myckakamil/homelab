@@ -1,0 +1,28 @@
+- name: Install basic packages
+  ansible.builtin.apt:
+    name:
+      - rsyslog
+      - sudo
+      - wget
+      - curl
+      - vim
+      - neovim
+      - git
+      - htop
+      - btop
+      - ncdu
+      - unzip
+      - tmux
+      - rsync
+      - tealdeer
+      - iftop
+      - tcpdump
+      - iperf3
+    state: present
+    update_cache: true
+
+- name: Enable sudo access for ansible user without password
+  ansible.builtin.copy:
+    dest: "/etc/sudoers.d/{{ ansible_user }}"
+    content: "{{ ansible_user }} ALL=(ALL) NOPASSWD:ALL\n"
+    mode: '0440'

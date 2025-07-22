@@ -2,15 +2,8 @@
   ansible.builtin.apt:
     name:
       - fail2ban
-      - syslog-ng
     state: present
     update_cache: true
-
-- name: Enable syslog-ng
-  ansible.builtin.service:
-    name: syslog-ng
-    state: started
-    enabled: true
 
 - name: Apply default fail2ban config
   ansible.builtin.template:

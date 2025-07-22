@@ -1,9 +1,10 @@
 ---
-- name: Hardening servers
+- name: Setting up servers
   hosts: all
   become: true
   roles:
     - hardening
+    - initial-setup
 
 - name: Deploy docker
   hosts: docker_hosts
@@ -23,11 +24,13 @@
   roles:
     - bind9-deployment
 
-- name: Deploy traefik proxy
+- name: Deploy docker-host VM
   hosts: docker-host
   become: true
   roles:
     - traefik-proxy
+    - monitoring-server
+    - monitoring-node
 
 - name: Deploy mariadb
   hosts: mysql
@@ -40,11 +43,4 @@
   become: true
   roles:
     - nextcloud
-    - monitoring-node
-
-- name: Deploy monitoring stack
-  hosts: docker-host
-  become: true
-  roles:
-    - monitoring-server
     - monitoring-node
