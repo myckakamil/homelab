@@ -1,6 +1,7 @@
 services:
   cadvisor:
     image: gcr.io/cadvisor/cadvisor:latest
+    restart: unless-stopped
     container_name: cadvisor
     ports:
       - "8080:8080"
@@ -15,5 +16,6 @@ services:
   redis:
     image: redis:latest
     container_name: redis
+    restart: unless-stopped
     ports:
       - "6379:6379"
