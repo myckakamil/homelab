@@ -1,9 +1,4 @@
 ---
-- name: Changed config file
-  community.docker.docker_compose_v2:
-    project_src: /home/{{ ansible_user }}/monitoring
-    state: restarted
-
 - name: Update pihole
   community.docker.docker_container_exec:
     container: pihole
