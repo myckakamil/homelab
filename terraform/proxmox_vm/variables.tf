@@ -156,6 +156,12 @@ variable "onboot" {
   default     = true
 }
 
+variable "tags" {
+  type = string
+  description = "VM tags"
+  default = "terraform-vm"
+}
+
 variable "boot_order" {
   type        = string
   description = "Boot order specification"

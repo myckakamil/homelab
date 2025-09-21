@@ -8,6 +8,7 @@ resource "proxmox_vm_qemu" "vm" {
   agent       = 1
   os_type     = "cloud-init"
   onboot      = var.onboot
+  tags        = var.tags
 
   dynamic "serial" {
     for_each = var.enable_serial ? [1] : []
