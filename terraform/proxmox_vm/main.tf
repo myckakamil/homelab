@@ -8,7 +8,7 @@ resource "proxmox_vm_qemu" "vm" {
   agent       = 1
   os_type     = "cloud-init"
   onboot      = var.onboot
-  tags        = var.tags
+  tags = join(",", distinct(concat(["terraform-vm"], var.tags)))
 
   dynamic "serial" {
     for_each = var.enable_serial ? [1] : []
@@ -39,6 +39,7 @@ resource "proxmox_vm_qemu" "vm" {
     size = var.disk_size
     storage = var.disk_storage
     discard = var.enable_discard
+    format = "raw"
   }
 
   dynamic "disk" {
@@ -49,6 +50,7 @@ resource "proxmox_vm_qemu" "vm" {
       size    = disk.value.size
       slot    = disk.value.slot
       discard = disk.value.discard ? true : false
+      format = "raw"
     }
   }
 

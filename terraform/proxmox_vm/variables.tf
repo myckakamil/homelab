@@ -169,9 +169,9 @@ variable "onboot" {
 }
 
 variable "tags" {
-  type = string
-  description = "VM tags"
-  default = "terraform-vm"
+  type = list(string)
+  description = "Additional VM tags. The 'terraform-vm' tag is always included."
+  default = []
 }
 
 variable "boot_order" {

@@ -1,5 +1,6 @@
 module "nextcloud" {
   source = "../proxmox_vm"
+  tags = ["public", "docker", "important"]
 
   vm_id = "101"
   vm_name = "nextcloud.lan.mycka.net"
@@ -20,6 +21,7 @@ module "nextcloud" {
 
 module "docker_host" {
   source = "../proxmox_vm"
+  tags = ["public", "docker", "important"]
 
   vm_id = "102"
   vm_name = "docker-host.lan.mycka.net"
@@ -40,6 +42,7 @@ module "docker_host" {
 
 module "pihole1" {
   source = "../proxmox_vm"
+  tags = ["dns", "docker"]
 
   vm_id = "103"
   vm_name = "pihole1.lan.mycka.net"
@@ -60,6 +63,7 @@ module "pihole1" {
 
 module "pihole2" {
   source = "../proxmox_vm"
+  tags = ["dns", "docker"]
 
   vm_id = "104"
   vm_name = "pihole2.lan.mycka.net"
@@ -80,6 +84,7 @@ module "pihole2" {
 
 module "bind1" {
   source = "../proxmox_vm"
+  tags = ["dns", "docker"]
 
   vm_id = "105"
   vm_name = "bind1.lan.mycka.net"
@@ -100,6 +105,7 @@ module "bind1" {
 
 module "bind2" {
   source = "../proxmox_vm"
+  tags = ["dns", "docker"]
 
   vm_id = "106"
   vm_name = "bind2.lan.mycka.net"
@@ -112,37 +118,6 @@ module "bind2" {
 
   disk_size = "10G"
   ip_config = "ip=172.30.20.22/24,gw=172.30.20.1"
-  vlan_tag = 20
-
-  ssh_public_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJF3mRlmUdCwWujN49vBX6n1cmp1CwEtqsYZf8eUftzt kamil"
-  cloudinit_password = var.secure_password
-}
-
-module "nas" {
-  source = "../proxmox_vm"
-
-  vm_id = "107"
-  vm_name = "nas.lan.mycka.net"
-
-  description = "Bind9 server number 2"
-  target_node = "pve1"
-
-  cores = 2
-  memory = 4096
-
-  disk_size = "10G"
-  
-  extra_disks = [
-    {
-      type    = "disk"
-      storage = "local-hdd"
-      size    = "4T"
-      slot    = "scsi1"
-      discard = true
-    }
-  ]
-
-  ip_config = "ip=172.30.20.107/24,gw=172.30.20.1"
   vlan_tag = 20
 
   ssh_public_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJF3mRlmUdCwWujN49vBX6n1cmp1CwEtqsYZf8eUftzt kamil"
