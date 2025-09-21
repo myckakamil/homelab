@@ -12,7 +12,7 @@ debian:
       ansible_host: 172.30.20.21
     bind9-2:
       ansible_host: 172.30.20.22
-    mysql:
+    nas:
       ansible_host: 172.30.20.107
     test:
       ansible_host: 172.30.30.150

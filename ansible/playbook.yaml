@@ -33,12 +33,6 @@
     - monitoring-node
     - notes
 
-- name: Deploy mariadb
-  hosts: mysql
-  become: true
-  roles:
-    - mariadb
-
 - name: Deploy nextcloud
   hosts: nextcloud
   become: true
