@@ -26,23 +26,29 @@ resource "proxmox_vm_qemu" "vm" {
 
   memory = var.memory
   scsihw = var.scsi_controller
+  
+  disk {
+    type = "cloudinit"
+    storage = var.cloudinit_storage
+    slot = "ide2"
+  }
 
-  disks {
-    ide {
-      ide2 {
-        cloudinit {
-          storage = var.cloudinit_storage
-        }
-      }
-    }
-    scsi {
-      scsi0 {
-        disk {
-          size    = var.disk_size
-          storage = var.disk_storage
-          discard = var.enable_discard
-        }
-      }
+  disk {
+    type = "disk"
+    slot = "scsi0"
+    size = var.disk_size
+    storage = var.disk_storage
+    discard = var.enable_discard
+  }
+
+  dynamic "disk" {
+    for_each = var.extra_disks
+    content {
+      type    = disk.value.type
+      storage = disk.value.storage
+      size    = disk.value.size
+      slot    = disk.value.slot
+      discard = disk.value.discard ? true : false
     }
   }
 

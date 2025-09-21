@@ -85,6 +85,18 @@ variable "enable_discard" {
   default     = true
 }
 
+variable "extra_disks" {
+  type = list(object({
+    type    = string
+    storage = string
+    size    = string
+    slot    = string
+    discard = bool
+  }))
+  default     = []
+  description = "List of additional disks to attach to the VM"
+}
+
 variable "network_model" {
   type        = string
   description = "Network adapter model"
