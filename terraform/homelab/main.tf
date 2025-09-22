@@ -1,6 +1,6 @@
 module "nextcloud" {
   source = "../proxmox_vm"
-  tags = ["public", "docker", "important"]
+  tags = ["public", "docker", "important", "vlan20"]
 
   vm_id = "101"
   vm_name = "nextcloud.lan.mycka.net"
@@ -21,7 +21,7 @@ module "nextcloud" {
 
 module "docker_host" {
   source = "../proxmox_vm"
-  tags = ["public", "docker", "important"]
+  tags = ["public", "docker", "important", "vlan20"]
 
   vm_id = "102"
   vm_name = "docker-host.lan.mycka.net"
@@ -42,7 +42,7 @@ module "docker_host" {
 
 module "pihole1" {
   source = "../proxmox_vm"
-  tags = ["dns", "docker"]
+  tags = ["dns", "docker", "vlan20"]
 
   vm_id = "103"
   vm_name = "pihole1.lan.mycka.net"
@@ -63,7 +63,7 @@ module "pihole1" {
 
 module "pihole2" {
   source = "../proxmox_vm"
-  tags = ["dns", "docker"]
+  tags = ["dns", "docker", "vlan20"]
 
   vm_id = "104"
   vm_name = "pihole2.lan.mycka.net"
@@ -84,7 +84,7 @@ module "pihole2" {
 
 module "bind1" {
   source = "../proxmox_vm"
-  tags = ["dns", "docker"]
+  tags = ["dns", "docker", "vlan20"]
 
   vm_id = "105"
   vm_name = "bind1.lan.mycka.net"
@@ -105,7 +105,7 @@ module "bind1" {
 
 module "bind2" {
   source = "../proxmox_vm"
-  tags = ["dns", "docker"]
+  tags = ["dns", "docker", "vlan20"]
 
   vm_id = "106"
   vm_name = "bind2.lan.mycka.net"
@@ -126,6 +126,7 @@ module "bind2" {
 
 module "testing" {
   source = "../proxmox_vm"
+  tags = ["vlan30"]
 
   vm_id = "150"
   vm_name = "testing.lan.mycka.net"
