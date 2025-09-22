@@ -1,3 +1,12 @@
+hypervisor:
+  hosts:
+    pve1:
+      ansible_host: 172.30.50.101
+      ansible_user: root
+    pve2:
+      ansible_host: 172.30.50.102
+      ansible_user: root
+
 debian:
   hosts:
     nextcloud:
@@ -12,8 +21,6 @@ debian:
       ansible_host: 172.30.20.21
     bind9-2:
       ansible_host: 172.30.20.22
-    nas:
-      ansible_host: 172.30.20.107
     test:
       ansible_host: 172.30.30.150
 

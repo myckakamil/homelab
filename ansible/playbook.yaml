@@ -1,6 +1,12 @@
 ---
+- name: Setting up Hypervisor
+  hosts: hypervisor
+  become: true
+  roles:
+    - hardening
+
 - name: Setting up servers
-  hosts: all
+  hosts: all:!hypervisor
   become: true
   roles:
     - hardening
