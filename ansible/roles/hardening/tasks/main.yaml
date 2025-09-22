@@ -1,6 +1,7 @@
 - name: Installing packages
   ansible.builtin.apt:
     name:
+      - rsyslog
       - fail2ban
     state: present
     update_cache: true
