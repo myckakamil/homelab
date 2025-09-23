@@ -30,7 +30,7 @@ qm create $VM_ID \
 	--memory $MEMORY \
 	--cpu host \
 	--cores $CORES \
-	--net0 virtio,bridge=$NETWORK,tag=30 \
+	--net0 virtio,bridge=$NETWORK,tag=$VLAN \
 	--agent enabled=1,fstrim_cloned_disks=1 \
 	--scsihw virtio-scsi-pci \
 	--serial0 socket --vga serial0 \
@@ -41,7 +41,7 @@ qm set $VM_ID --ciuser ${USERNAME}
 qm set $VM_ID --sshkeys ${SSH_KEY}
 qm set $VM_ID --ipconfig0 ip=dhcp
 
-qm disk resize $VM_ID scsi0 10G
+qm disk resize $VM_ID scsi0 $DISK_SIZE
 
 qm template $VM_ID
 
